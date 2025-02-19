@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    
+    <title>Review Collector</title>
+</head>
+<body>
+    <main class="main" id="main">
+        <section class="user-input-section" id="user-input-section">
+            <div class="user-input" id="user-input">
+                    <h1 class="heading">Your Review matters</h1>
+                <label for="user-name">Name: </label>
+                <input type="text" id="user-name">
+                <label for="user-review">Review: </label>
+                <textarea name="user-review" id="user-review"></textarea>
+                <p class="rating-text">Rating: </p>
+                <div class="star-rating" id="star-rating">
+                    <i class="fa-regular fa-star" id="one-star"></i>
+                    <i class="fa-regular fa-star" id="two-star"></i>
+                    <i class="fa-regular fa-star" id="three-star"></i>
+                    <i class="fa-regular fa-star" id="four-star"></i>
+                    <i class="fa-regular fa-star" id="five-star"></i>
+                </div>
+                <button class="submit-btn" id="submit-btn">Submit</button>
+               
+            </div>
+            
+            <div class="emoji-display" id="emoji-display">
+                <div class="emoji-reaction" id="emoji-reaction">
+                    <!-- emoji gifs and captions comes here from JS -->
+                </div>
+                <p class="mode" id="mode">Light Mode</p>
+            </div>
+        </section>
+
+        <section class="all-reviews-section" id="all-reviews-section">
+            <!-- Reviews will come here -->
+        </section>
+    </main> 
+    <script src="index.js" type="module"></script>
+</body>
+</html>
