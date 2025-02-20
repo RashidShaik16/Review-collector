@@ -8,6 +8,7 @@ body{
     display: flex;
     background-color: #222222;
     /* background-color: #aaa6a6; */
+    font-family: "Roboto", serif;
 }
 
 main{
@@ -42,6 +43,7 @@ main{
     flex-basis: 45%;
     overflow: scroll;
     color: #ffffff;
+   
 }
 
 .all-reviews-section::-webkit-scrollbar {
@@ -111,6 +113,7 @@ main{
 
 .comment{
     font-size: 0.9em;
+    font-family: "Playfair Display", serif;
 }
 
 .user-name{
