@@ -7,6 +7,20 @@ const userName = document.getElementById("user-name")
 const userReview = document.getElementById("user-review")
 const toggleMode = document.getElementById("mode")
 let starsGiven = 0
+// let oneStars = 0
+// let twoStars = 0
+// let threeStars = 0
+// let fourStars = 1
+// let fiveStars = 1
+const stars = [0, 0, 0, 1, 1]
+const starsPercentage = [0, 0, 0, 50, 50]
+
+// let oneStarsPercentage = 0
+// let twoStarsPercentage = 0
+// let threeStarsPercentage = 0
+// let fourStarsPercentage = 0
+// let fiveStarsPercentage = 0
+
 let darkMode = true
 
 
@@ -22,6 +36,7 @@ const emojiGifs = {
 
 
 const preloadedEmojis = {};
+
 for (let key in emojiGifs) {
     preloadedEmojis[key] = new Image();
     preloadedEmojis[key].src = emojiGifs[key];
@@ -77,7 +92,7 @@ function starRatingFill(starsGiven) {
 // On submit this function process the data and calls the renderReviews function
 submitBtn.addEventListener("click", function(){
     if(starsGiven > 0){
-        const stars = new Array(5).fill(null).map((star, index) => {
+        const starRatings = new Array(5).fill(null).map((star, index) => {
             if(index < starsGiven){
                 return `<i class="fa-solid fa-star"></i>`
              } else {
@@ -88,9 +103,9 @@ submitBtn.addEventListener("click", function(){
         const timeStamp = new Date()
         const date = timeStamp.toLocaleDateString()
         const time = timeStamp.toLocaleTimeString()
-    
+        
         reviewsArr.unshift({
-                starsGiven: stars,
+                starsGiven: starRatings,
                 starCount: starsGiven,
                 userName: userName.value ? userName.value : "Anonymous",
                 comment: userReview.value,
@@ -98,11 +113,13 @@ submitBtn.addEventListener("click", function(){
     
         })
 
+        updateProgressBar(starsGiven)
         starsGiven = 0
         userName.value = ""
         userReview.value = ""
         emojiReaction.innerHTML = ""
         starRatingFill()
+        calculateOverallRating()
         renderReviews()
     }
     
@@ -122,6 +139,8 @@ toggleMode.addEventListener("click", function(){
         userReview.style.backgroundColor = "#ffffff"
         userName.style.color = "#151515"
         userReview.style.color = "#151515"
+        document.getElementById("rating-status-section").style.backgroundColor = "#aaa6a6"
+        document.getElementById("rating-status-section").style.color = "#151515"
         
     } else{
         document.body.style.backgroundColor = "#222222"
@@ -133,11 +152,57 @@ toggleMode.addEventListener("click", function(){
         userReview.style.backgroundColor = "rgb(87, 83, 83)"
         userName.style.color = "#ffffff"
         userReview.style.color = "#ffffff"
+        document.getElementById("rating-status-section").style.backgroundColor = "#222222"
+        document.getElementById("rating-status-section").style.color = "#ffffff"
         
     }
 
     renderReviews()
 })
+
+
+// function to set the progress bars percentage
+function updateProgressBar(starCount){
+    stars[starCount-1]++
+    calculateBarPercentage()
+    fillProgressBar()
+}
+
+// Helper functions for updateProgressBar
+function calculateBarPercentage() {
+    for(let i = 0; i < stars.length; i++){
+        starsPercentage[i] = stars[i] / reviewsArr.length * 100
+    }
+}
+
+function calculateOverallRating() {
+    const ratingsDenominator = reviewsArr.map(function(rating) {
+        return rating.starCount
+    }).reduce(function(total, current){
+        return total + current
+    })
+
+    const ratingsNumerator = stars.reduce(function(total, current) {
+        return total + current
+    })
+
+    const overallRating = ratingsDenominator / ratingsNumerator
+
+    document.getElementById("overall-rating-span").textContent = overallRating.toPrecision(2)
+}
+
+
+
+function fillProgressBar() {
+    const allStatusBars = document.querySelectorAll(".progress-inner-bar")
+    const allStatusPercentage = document.querySelectorAll(".star-percentage")
+    for(let i = 1; i <= allStatusBars.length; i++) {
+        allStatusBars[i-1].style.width = `${starsPercentage[starsPercentage.length-i]}%`
+        allStatusPercentage[i-1].textContent = `${stars[stars.length-i]}`
+    }
+}
+
+
 
 
 // This function renders reviews to the DOM
@@ -167,7 +232,9 @@ function renderReviews() {
 
 }
 
-
+// calculateBarPercentage()
+fillProgressBar()
+calculateOverallRating()
 renderReviews()
 
 

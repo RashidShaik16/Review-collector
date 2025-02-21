@@ -9,16 +9,19 @@ body{
     background-color: #222222;
     /* background-color: #aaa6a6; */
     font-family: "Roboto", serif;
+    font-size: 15px;
 }
 
 main{
-    display: flex;
+    display: grid;
+    grid-template-columns: 55% auto;
+    grid-template-rows: auto auto;
     gap: 1em;
     width: 980px;
-    height: 480px;
+    height: 680px;
     background-color: #151515;
     margin: auto;
-    padding: 1em;
+    padding: 1.5em;
 }
 
 .mode{
@@ -32,14 +35,12 @@ main{
 
 .user-input-section{
     display: flex;
-    flex-basis: 55%;
     background-color: #222222;
-    /* background-color: #aaa6a6; */
     border-radius: 1.5em;
 }
 
 .all-reviews-section{
-    flex-basis: 45%;
+    grid-row: span 2;
     overflow: scroll;
     color: #ffffff;
    
@@ -80,7 +81,7 @@ main{
 
 .review-container{
     width: 100%;
-    min-height: 40px;
+    min-height: 35px;
     padding: 0.5em 1em;
     border-radius: 1.5em;
     margin-bottom: 10px;
@@ -118,7 +119,8 @@ main{
 .user-name{
     font-style: italic;
     text-align: end;
-    font-weight: bolder;
+    font-weight: 400;
+    font-family: "Playfair Display", serif;
 }
 
 
@@ -185,20 +187,153 @@ textarea{
 }
 
 
-@media (max-width: 720px) {
-    main{
-        flex-direction: column;
-        height: 100vh;
-        min-width: 420px;
+/* progress bars */
+
+.rating-status-section{
+    color: #ffffff;
+    background-color: #222222;
+    padding: 1em;
+    width: 100%;
+    gap: 0.9375em;
+    border-radius: 1.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rating-status-heading{
+    margin: 0 0 15px 5px;
+}
+
+.progress-bar-section{
+    width: 60%;
+}
+
+.overall-rating-section{
+    /* border: 2px solid white; */
+    width: 40%;
+}
+
+.overall-rating{
+    margin: auto;
+    text-align: center;
+    font-size: 1.25em;
+    
+}
+
+.overall-rating span{
+    font-size: 3.25em;
+}
+
+.progress-status-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.progress-status-container p{
+    margin: 0;
+    font-size: 0.9em;
+}
+
+.progress-outer-bar{
+    width: 200px;
+    height: 12px;   
+    background-color: white;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-inner-bar{
+    width: 0%;
+    height: 100%;
+    background-color: #de7929;
+    transition: width 0.6s ease-in-out;
+}
+
+/* medai queries */
+
+
+@media (max-width: 920px) {
+    .progress-bar-section{
+        width: 90%;
     }
 
+    .overall-rating span{
+        font-size: 2.75em;
+    }
+}
+
+@media (max-width: 840px) {
+    main{
+        /* display: flex;
+        flex-direction: column; */
+        display: grid;
+        grid-template-columns: auto;
+        height: auto;
+        min-width: 480px;
+        overflow: scroll;
+    }
+
+
     .user-input-section{
-        height: 50%;
+        height: auto;
+    }
+
+    .all-reviews-section{
+        height: auto;
+        max-height: 350px;
+    }
+
+    .rating-status-section{
+        width: 60%;
+    }
+
+}
+
+
+@media (max-width: 780px) {
+    .rating-status-section{
+        width: 70%;
     }
 }
 
 
+@media (max-width: 740px) {
+    .rating-status-section{
+        width: 80%;
+    }
+}
+
+
+@media (max-width: 610px) {
+    .rating-status-section{
+        width: 90%;
+    }
+
+    #overall-rating-span{
+        font-size: 2.5em;
+    }
+}
+
+@media (max-width: 570px) {
+    .rating-status-section{
+        width: 100%;
+    }
+
+    #overall-rating-span{
+        font-size: 2.5em;
+    }
+}
+
+
+
 @media (max-width: 420px) {
+    body{
+        font-size: 13px;
+    }
     .heading{
         font-size: 22px;
     }
@@ -211,4 +346,7 @@ textarea{
     .emoji-caption{
         font-size: 14px;
     }
+
+
+
 }
